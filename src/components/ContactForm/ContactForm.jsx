@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import s from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/contactsSlice";
+import { addContactThunk } from "../../redux/contacts/operations";
 
 const ContactForm = () => {
   const schema = Yup.object({
@@ -31,9 +32,8 @@ const ContactForm = () => {
     const newItem = {
       name: data.name,
       number: data.number,
-      id: nanoid(),
     };
-    dispatch(addContact(newItem));
+    dispatch(addContactThunk(newItem));
     options.resetForm();
   };
   return (

@@ -2,11 +2,15 @@ import React, { useEffect } from "react";
 import Contact from "../Contact/Contact";
 import s from "./ContactList.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { selectContacts } from "../../redux/contacts/selectContacts";
+import {
+  selectContacts,
+  selectIsLoading,
+} from "../../redux/contacts/selectContacts";
 import { selectFilter } from "../../redux/filters/selectFilter";
-import { fetchTodosThunk } from "../../redux/contacts/operations";
+import { fetchContactThunk } from "../../redux/contacts/operations";
 
 const ContactList = () => {
+  const isLoading = useSelector(selectIsLoading);
   const contacts = useSelector(selectContacts);
   const filter = useSelector(selectFilter);
 
@@ -16,11 +20,13 @@ const ContactList = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchTodosThunk())
+    dispatch(fetchContactThunk());
   }, [dispatch]);
 
   return (
     <div>
+      {isLoading && <h1>Loading...</h1>}
+
       <ul>
         {filteredData.map((item) => (
           <li className={s.li} key={item.id}>
