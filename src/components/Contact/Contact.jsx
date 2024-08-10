@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { deleteContact } from "../../redux/contacts/contactsSlice";
-import { deleteContactThunk } from "../../redux/contacts/operations";
+import { deleteContactThunk } from "../../redux/contacts/contactsOps";
 
 const Contact = ({ item }) => {
   const dispatch = useDispatch();

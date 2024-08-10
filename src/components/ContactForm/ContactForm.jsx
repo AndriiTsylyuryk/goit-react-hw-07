@@ -5,7 +5,7 @@ import * as Yup from "yup";
 import s from "./ContactForm.module.css";
 import { useDispatch } from "react-redux";
 import { addContact } from "../../redux/contacts/contactsSlice";
-import { addContactThunk } from "../../redux/contacts/operations";
+import { addContactThunk } from "../../redux/contacts/contactsOps";
 
 const ContactForm = () => {
   const schema = Yup.object({
