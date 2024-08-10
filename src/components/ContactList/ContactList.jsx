@@ -4,7 +4,7 @@ import s from "./ContactList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { selectIsLoading } from "../../redux/contacts/selectContacts";
 
-import { fetchContactThunk } from "../../redux/contacts/contactsOps";
+import { fetchContactThunk } from "../../redux/contactsOps";
 import { selectFilteredContacts } from "../../redux/contacts/contactsSlice";
 
 const ContactList = () => {
