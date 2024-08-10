@@ -1,4 +1,4 @@
-import { createSelector, createSlice } from "@reduxjs/toolkit";
+import { createSelector, createSlice, isAnyOf } from "@reduxjs/toolkit";
 import {
   addContactThunk,
   deleteContactThunk,
@@ -24,17 +24,38 @@ const slice = createSlice({
         state.contacts.items = action.payload;
         state.isLoading = false;
       })
-      .addCase(fetchContactThunk.pending, (state, action) => {
-        state.isLoading = true;
-      })
       .addCase(deleteContactThunk.fulfilled, (state, action) => {
         state.contacts.items = state.contacts.items.filter(
           (item) => item.id !== action.payload
         );
+        state.isLoading = false;
       })
       .addCase(addContactThunk.fulfilled, (state, action) => {
         state.contacts.items.push(action.payload);
-      });
+        state.isLoading = false;
+      })
+      .addMatcher(
+        isAnyOf(
+          fetchContactThunk.pending,
+          deleteContactThunk.pending,
+          addContactThunk.pending
+        ),
+        (state) => {
+          state.isLoading = true;
+          state.isError = false;
+        }
+      )
+      .addMatcher(
+        isAnyOf(
+          fetchContactThunk.rejected,
+          deleteContactThunk.rejected,
+          addContactThunk.rejected
+        ),
+        (state) => {
+          state.isLoading = false;
+          state.isError = true;
+        }
+      );
   },
 });
 export const selectFilteredContacts = createSelector(

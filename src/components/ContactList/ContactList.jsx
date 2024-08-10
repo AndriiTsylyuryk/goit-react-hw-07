@@ -9,14 +9,12 @@ import { selectFilteredContacts } from "../../redux/contacts/contactsSlice";
 
 const ContactList = () => {
   const isLoading = useSelector(selectIsLoading);
-
   const filteredData = useSelector(selectFilteredContacts);
-
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(fetchContactThunk());
-  }, [dispatch]);
+  // useEffect(() => {
+  //   dispatch(fetchContactThunk());
+  // }, [dispatch]);
 
   return (
     <div>
